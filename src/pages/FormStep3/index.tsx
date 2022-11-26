@@ -1,13 +1,15 @@
-import { useNavigate, Link } from 'react-router-dom';
-import { ChangeEvent, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useForm, FormActions } from '../../contexts/FormContext';
 import { Theme } from '../../components/theme';
+import { Button } from '../../components/Button';
 
 import * as C from './styles';
 
 export const FormStep3 = () => {
    const navigate = useNavigate();
    const { state, dispatch } = useForm();
+   const [btnDisable, setBtnDisable] = useState(true)
 
    useEffect(() => {
 
@@ -20,21 +22,15 @@ export const FormStep3 = () => {
          })
       }
 
-   }, [])
-
-   // Desenvolver + telas
-   const handleNextStep = () => {
-      if (state.email.length > 4 && 
-         state.github.length > 6 ) {
-         alert('Finalizou')
-         console.log(state)
-      } else {
-         alert('Preencha os campos corretamente')
-         // mostrar no layout o erro como tarefa
+      if (state.email.length > 5 &&
+         state.github.length > 5) {
+         setBtnDisable(false)
       }
-   }
-   const handlePrevStep = () => {
-      navigate('/step2')
+
+   }, [state.email, state.github])
+
+   const handleNextStep = () => {
+      console.log(state)
    }
 
    const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -75,10 +71,9 @@ export const FormStep3 = () => {
                   onChange={handleGithubChange}
                />
             </label>
-
-            {/* Componetizar os botões. Botoes com cores condicionais */}
-            <Link to="/step2"><button onClick={handlePrevStep}>Voltar</button></Link>
-            <button onClick={handleNextStep}>Finalizar Cadastro</button>
+            
+            <Button text={'Voltar'} path={'/step2'} isDisabled={false} ></Button>
+            <Button text={'Finalizar'} path={'/step4'} isDisabled={btnDisable} onClick={handleNextStep}></Button>
          </C.Container>
       </Theme>
    )

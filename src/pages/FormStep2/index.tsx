@@ -1,7 +1,8 @@
-import { useNavigate, Link } from 'react-router-dom';
-import { ChangeEvent, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { useForm, FormActions } from '../../contexts/FormContext';
 import { Theme } from '../../components/theme';
+import { Button } from '../../components/Button';
 
 import * as C from './styles';
 import { SelectOption } from '../../components/SelectOption';
@@ -25,18 +26,11 @@ export const FormStep2 = () => {
 
 
    const handleNextStep = () => {
-      if (state.level === 0 || state.level === 1) {
-         navigate('/step3')
-      } else {
-         alert('Selecione uma opção!')
-         // mostrar no layout o erro como tarefa
-      }
-   }
-   const handlePrevStep = () => {
-      navigate('/')
+      navigate('/step3')
+      
    }
 
-   const setLevel = (level: number) => {
+   const setLevel = (level: string) => {
       dispatch({
          type: FormActions.setLevel,
          payload: level
@@ -55,21 +49,20 @@ export const FormStep2 = () => {
                title={'Sou iniciante'}
                description={'Comecei a programar há menos de 2 anos'}
                icon={'🧠'}
-               selected={state.level === 0}
-               onSelect={() => { setLevel(0) }}
+               selected={state.level === 'aprendiz' ? true : false}
+               onSelect={() => { setLevel('aprendiz') }}
             />
 
             <SelectOption
                title={'Sou programador'}
                description={'Já programo há 2 anos ou mais'}
                icon={'🧑‍💻'}
-               selected={state.level === 1}
-               onSelect={() => { setLevel(1) }}
+               selected={state.level === 'experiente' ? true : false}
+               onSelect={() => { setLevel('experiente') }}
             />
 
-            {/* Componetizar os botões. Botoes com cores condicionais */}
-            <Link to="/"><button onClick={handlePrevStep}>Voltar</button></Link>
-            <button onClick={handleNextStep}>Próximo</button>
+            <Button text={'Voltar'} path={'/'} isDisabled={false} ></Button>
+            <Button text={'Próximo'} path={'/step3'} isDisabled={false} onClick={handleNextStep}></Button>
          </C.Container>
       </Theme>
    )

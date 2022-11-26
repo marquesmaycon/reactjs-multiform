@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.header`
    padding: 25px 0;
-   border-bottom: 1px solid #16195C;
+   border-bottom: 1px solid ${({theme})=>theme.borderColor};
 
    h1 {
       margin: 0;
@@ -12,6 +12,6 @@ export const Container = styled.header`
 
    p {
       font-size: 14px;
-      color: #b8b8d4;
+      color: ${({ theme }) => theme.fcolorS};
    }
 `

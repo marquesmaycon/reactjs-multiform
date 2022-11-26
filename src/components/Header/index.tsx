@@ -1,7 +1,9 @@
+import { useState } from 'react'
+import { Button } from '../Button'
 import * as C from './styles'
 
 export const Header = () => {
-
+   
    return (
       <C.Container>
          <h1>Cadastro de Desenvolvedor</h1>

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
    p {
       font-size: 13px;
-      color: #b8b8b4;
+      color: ${({ theme }) => theme.fcolorS};
    }
 
    h1 {
@@ -15,7 +15,7 @@ export const Container = styled.div`
    hr {
       height: 1px;
       border: 0;
-      background-color: #16195C;
+      background-color: ${({theme})=>theme.borderColor};
       margin: 30px 0;
    }
 
@@ -30,38 +30,13 @@ export const Container = styled.div`
          box-sizing: border-box;
          width: 100%;
          padding: 17px 10px;
-         border: 2px solid #25cd89;
+         border: 2px solid ${({ theme }) => theme.detailsPrimary };
          border-radius: 10px;
          color: #FFF;
          outline: 0;
          font-size: 18px;
-         background-color: #02044A;
+         background-color: ${({theme})=> theme.bgSecondary};
+         transition: all .3s;
       }
-      
-   }
-
-   button {
-      background-color: #25CD89;
-      color: #FFF;
-      font-size: 14px;
-      font-weight: bold;
-      padding: 20px 40px;
-      border: 0;
-      border-radius: 30px;
-      cursor: pointer;
-      margin-top: 30px;
-      margin-inline-end: 10px;
-      transition: all .3s;
-
-      &:hover {
-         background-color: #03AB67;
-      }
-   }
-
-   button:disabled {
-      background-color: gray;
-      color: #b8b8b4;
-      cursor: auto;
-      // 1h e 7m
    }
 `

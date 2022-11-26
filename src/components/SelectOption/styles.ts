@@ -1,17 +1,18 @@
 import styled from "styled-components";
+import { Theme } from "../theme";
 
 export const Container = styled.div<{ selected: boolean }>`
    display: flex;
-   border: 2px solid ${({ selected }) => selected ? '#25cd89' : '#16195C'};
+   border: 2px solid ${({ selected, theme }) => selected ? `${theme.detailsPrimary}` : '#AAAAAA55'};
    border-radius: 10px;
-   padding: 20px;
-   margin-bottom: 25px;
+   padding: 9px;
+   margin-bottom: 10px;
    align-items: center;
    cursor: pointer;
    transition: all .3s;
 
    &:hover {
-      border: 2px solid #03ab67;
+      border: 2px solid ${({ theme }) => theme.detailSecondary};
    }
 `
 
@@ -19,7 +20,7 @@ export const Icon = styled.div`
    width: 60px;
    height: 60px;
    border-radius: 50%;
-   background-color: #191a59;
+   background-color: ${({ theme }) => theme.bgSecondary};
    display: flex;
    justify-content: center;
    align-items: center;
@@ -39,5 +40,5 @@ export const Title = styled.div`
 
 export const Description = styled.div`
    font-size: 14px;
-   color: #8d8dd4;
+   color: ${({ theme }) => theme.fcolorS};
 `

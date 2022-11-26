@@ -1,29 +1,39 @@
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 import { Footer } from '../Footer'
 import { Header } from '../Header'
 import { SidebarItem } from '../SidebarItem'
 import { useForm } from '../../contexts/FormContext'
+import { ThemeProvider } from 'styled-components'
+import { coldTheme, bubblegumTheme } from '../../themes/themes'
 import * as C from './styles'
+import { Button } from '../Button'
 
 type Props = {
    children: ReactNode
 }
 
-export const Theme = ({children}: Props) => {
+export const Theme = ({ children }: Props) => {
+   const [theme, setTheme] = useState(coldTheme)
 
-   const {state} = useForm()
+   const toggleTheme = () => {
+      setTheme(theme === bubblegumTheme ? coldTheme : bubblegumTheme)
+   }
+
+   const { state } = useForm()
 
    return (
+      <ThemeProvider theme={theme}>
       <C.Container>
          <C.Area>
-            
+
             <Header />
+            
 
             <C.Steps>
 
                <C.Sidebar>
-                  
-                  <SidebarItem 
+
+                  <SidebarItem
                      title='Pessoal'
                      description='Se identifique'
                      icon='profile'
@@ -31,7 +41,7 @@ export const Theme = ({children}: Props) => {
                      active={state.currentStep === 1}
                   />
 
-                  <SidebarItem 
+                  <SidebarItem
                      title='Profissional'
                      description='Seu nível'
                      icon='book'
@@ -39,12 +49,20 @@ export const Theme = ({children}: Props) => {
                      active={state.currentStep === 2}
                   />
 
-                  <SidebarItem 
+                  <SidebarItem
                      title='Contatos'
                      description='Como te achar'
                      icon='mail'
                      path='/step3'
                      active={state.currentStep === 3}
+                  />
+
+                  <SidebarItem
+                     title='Pronto!'
+                     description='Cadastro finalizado'
+                     icon='check'
+                     path='/step4'
+                     active={state.currentStep === 4}
                   />
 
                </C.Sidebar>
@@ -55,9 +73,10 @@ export const Theme = ({children}: Props) => {
 
             </C.Steps>
 
-            <Footer/>
+            <Footer><Button text={'Mudar Tema'} path={''} onClick={toggleTheme}/></Footer>
 
          </C.Area>
       </C.Container>
+      </ThemeProvider>
    )
 }

@@ -20,23 +20,24 @@ export const Title = styled.div`
   text-align: right;
   font-weight: bold;
   margin-bottom: 5px;
-  color: #fff;
+  color: ${({ theme }) => theme.fcolorP};
 `
 
 export const Description = styled.div`
    text-align: right;
    font-size: 13px;
-   color: #b8b8d4;
+   color:${({ theme }) => theme.fcolorS};;
 `
 
 export const IconArea = styled.div<{ active: boolean }>`
    width: 50px;
    height: 50px;
    border-radius: 50%;
-   background-color: ${({active})=>active ? '#25cd89':'#494a7c'} ;
+   background-color: ${({ active, theme }) => active ? `${theme.detailsPrimary}` : '#494a7c'} ;
    display: flex;
    justify-content: center;
-   align-items: center;
+   align-items: center;   
+   transition: all .3s;
 `
 
 export const Point = styled.div<{ active: boolean }>`
@@ -46,6 +47,6 @@ export const Point = styled.div<{ active: boolean }>`
   border: 3px solid #494a7c;
   margin-left: 30px;
   margin-right: -6px;
-  background-color:  ${({active})=>active ? '#25cd89':'#02044a'};
+  background-color:  ${({ active, theme }) => active ? `${theme.detailsPrimary}` : '#02044a'};
 `
 
